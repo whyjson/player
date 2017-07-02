@@ -1,7 +1,8 @@
 <template>
   <transition name="showRouter">
   	<div class="find" id="find" ref="find">
-	  	<div class="find_back">
+	  	<div class="find_back" >
+	  		<div class="block"></div>
 	  		<div class="find_search">
 		  		<input type="text" v-model="keywords" @focus="inputFocus" v-bind:class="{'input-focus': isShowHot}" placeholder="请输入关键字"/>
 		  		<div v-show="!isShowHot" class="find_btn" @click="toSearch(keywords)">搜索</div>
@@ -22,7 +23,7 @@
 	      <mu-list v-if="!isShowHot">
 					<mu-list-item v-for="(item, index) of musicList" :key="item.id" :title="strDecode(item.fsong)" :describeText="item.f.split('|')[3]&&strDecode(item.f.split('|')[3].replace(/amp\;/g, '')).replace(/\;/g, '/') || '佚名'" >
 					  <mu-avatar slot="leftAvatar" @click="playMusic(index, (item.f.split('|')[3]&&strDecode(item.f.split('|')[3].replace(/amp\;/g, '')).replace(/\;/g, '/') || '佚名')+' - '+strDecode(item.fsong), item.f.split('|')[0], item.f.split('|')[4]&&'http://imgcache.qq.com/music/photo/album_300/'+item.f.split('|')[4]%100+'/300_albumpic_'+item.f.split('|')[4]+'_0.jpg')" v-bind:src="item.f.split('|')[4]&&'http://imgcache.qq.com/music/photo/album_300/'+item.f.split('|')[4]%100+'/300_albumpic_'+item.f.split('|')[4]+'_0.jpg'" />
-					  <mu-icon value="add" slot="right"/>
+					  <mu-icon value="add" slot="right" @click="addMusic( (item.f.split('|')[3]&&strDecode(item.f.split('|')[3].replace(/amp\;/g, '')).replace(/\;/g, '/') || '佚名')+' - '+strDecode(item.fsong), item.f.split('|')[0], item.f.split('|')[4]&&'http://imgcache.qq.com/music/photo/album_300/'+item.f.split('|')[4]%100+'/300_albumpic_'+item.f.split('|')[4]+'_0.jpg')" />
 					  <mu-divider />
 					</mu-list-item>
 					  
@@ -98,10 +99,11 @@ export default {
 	  playMusic(index, name, src, imgSrc) {
       src = 'http://ws.stream.qqmusic.qq.com/'+src+'.m4a?fromtag=46';
       this.$store.commit('playMusic', {name: name, src: src, imgSrc: imgSrc});
-//    this.$store.commit('addMusic', {name: name, src: src, musicImgSrc: imgSrc});
       this.playIndex = index;
     },
-    
+    addMusic(name, src, imgSrc){
+    	this.$store.commit('addMusic', {name: name, src: src, musicImgSrc: imgSrc});
+    },
 	  inputFocus() {
       if (this.keywords.trim()) {
         return;
@@ -119,10 +121,8 @@ export default {
       return str.replace(/&#(x)?([^&]{1,5});?/g,function($,$1,$2) {
           return String.fromCharCode(parseInt($2 , $1 ? 16:10));
       });
-    },
-    scrollLoad(){
-    	alert()
     }
+    
   }
     
 }
@@ -139,7 +139,11 @@ export default {
 	.find_back{
 		width: 100%;
 		height: 100%;
-		/*background: rgba(0,0,0,0.4);*/
+		/*background: rgba(255,255,255,0.4);*/
+		.block{
+			width: 100%;
+			height: 50px;
+		}
 		.find_search{
 			width: 100%;
 			height: 50px;

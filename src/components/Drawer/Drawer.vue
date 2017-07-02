@@ -1,11 +1,11 @@
 <template>
-  <div>
+  <div class="drawer">
 	  <!--<mu-raised-button label="toggle drawer" @click="toggle()"/>-->
 	  	<mu-drawer right :open="open" @close="toggle()">
-	    <mu-appbar title="Muse UI"/>
+	    <mu-appbar title="WhySong"/>
 	    <mu-list>
-	      <mu-list-item title="Menu Item 1"/>
-	      <mu-list-item title="Menu Item 2"/>
+	      <mu-list-item title="whyjson"/>
+	      <mu-list-item title="https://github.com/whyjson"/>
 	      <mu-list-item title="Menu Item 3"/>
 	      <mu-list-item @click="toggle()" title="Close"/>
 	    </mu-list>
@@ -35,5 +35,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
+.drawer div{
+	z-index: 99999999999999999999999;
+}
 </style>

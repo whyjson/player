@@ -65,6 +65,7 @@
     "sinon-chai": "^2.8.0",
     "style-loader": "^0.17.0",
     "url-loader": "^0.5.8",
+    "vue-awesome-swiper": "^2.5.0",
     "vue-axios": "^2.0.2",
     "vue-loader": "^11.3.4",
     "vue-style-loader": "^2.0.5",

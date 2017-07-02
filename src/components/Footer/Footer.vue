@@ -1,11 +1,12 @@
 <template>
 	<transition name="fade">
 		<div id='foot'>
-    <mu-bottom-nav :value="bottomVal" shift @change="handleChange" >
-	    <mu-bottom-nav-item value="movies" title="My" icon="person" to="/home"/>
-	    <mu-bottom-nav-item value="music" title="Find" icon="music_note" to="/playing" @click="changeFooter"/>
-		</mu-bottom-nav>
-  </div>
+		    <mu-bottom-nav :value="bottomVal" shift @change="handleChange" >
+		    	<mu-bottom-nav-item value="home" title="home" icon="home" to="/home"/>
+			    <mu-bottom-nav-item value="movies" title="My" icon="person" to="/my"/>
+			    <mu-bottom-nav-item value="music" title="Find" icon="music_note" to="/playing" @click="changeFooter"/>
+			</mu-bottom-nav>
+	  	</div>
 	</transition>
   
 </template>

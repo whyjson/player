@@ -53,6 +53,9 @@ export default {
 	line-height: 50px;
 	display: flex;
 	justify-content: space-between;
+	z-index: 99999999999;
+	position: fixed;
+	top: 0px;
 	.left {
 		float: left;
 		width: 50px;

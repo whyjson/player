@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import My from '@/components/My/My.vue'
 import Playing from '@/components/Playing/Playing.vue'
 import Find from '@/components/Find/Find.vue'
+import Home from '@/components/Home/Home.vue'
 Vue.use(Router)
 import store from '../store.js'
 import "../assets/jquery-1.8.3.min.js"
@@ -10,8 +11,16 @@ export default new Router({
 	linkActiveClass: 'active',
   mode: 'history',
   routes: [
-    {
+  	{
       path: '/home',
+      component: Home,
+      beforeEnter: (to, from, next) => {
+        store.commit("changeBottom","home");
+        next();
+      }
+    },
+    {
+      path: '/my',
       component: My,
       beforeEnter: (to, from, next) => {
         store.commit("changeBottom","movies");

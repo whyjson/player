@@ -55,14 +55,23 @@ Vue.use(Vuex);
 	      state.audio.musicImgSrc = payload.imgSrc;
 	      state.isPlaying = true;
 	    },
-	    addMusic(state, song) {
+	    addMusic(state, song,callback) {
 	      for (let music of state.musicData) {
 	        if (JSON.stringify(music) === JSON.stringify(song)) {
 	          return;
 	        }
 	      }
 	      state.musicData.unshift(song);
+	      if(callback){
+	      	callback();
+	      }
     	},
+    	del(state, index) {
+	      if (state.musicData.length === 0) {
+	        return;
+	      }
+	      state.musicData.splice(index, 1);
+	    },
 	},
 	actions:{
 		getData({ commit,state }) {

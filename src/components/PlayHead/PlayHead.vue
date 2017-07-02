@@ -39,7 +39,7 @@ export default {
   		this.$store.commit("showMusicList",!this.isShowMusicList)
   	},
   	goRouter(){
-  		this.$router.push({path:"/home"});
+  		window.history.go(-1);
 //		this.$store.commit("changeBottom","movies");
   	}
   }
