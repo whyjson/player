@@ -33,24 +33,44 @@ export default {
 		}
 	},
 	mounted(){
+		let interval = "";
 		this.nativeAudio = document.querySelector('audio');
-		console.log(this.isShowFooter);
-		this.nativeAudio.addEventListener('play', () => {
-      this.totalTime = this.transformTime(this.nativeAudio.duration);
-      this.now = this.nativeAudio.currentTime;
-
-      setInterval(() => {
+		if(this.isPlaying){
+			this.totalTime = this.transformTime(this.nativeAudio.duration);
+			interval = setInterval(() => {
         this.now = this.nativeAudio.currentTime;
         if(this.now==this.nativeAudio.duration){
         	this.isPlaying=false;
         }
-        console.log(this.isShowFooter);
-//      if(!this.isShowFooter){
-        	console.log(1);
+
+        if(!this.isShowFooter){
+
         	this.$refs.bar.style.left=this.now/this.nativeAudio.duration*100+"%";
-//      }
+        }
         
       }, 1000);
+		}else {
+			clearInterval(interval);
+			interval = null;
+		}
+		this.nativeAudio.addEventListener('play', () => {
+      this.totalTime = this.transformTime(this.nativeAudio.duration);
+      this.now = this.nativeAudio.currentTime;
+			if(!interval){
+				interval = setInterval(() => {
+	        this.now = this.nativeAudio.currentTime;
+	        if(this.now==this.nativeAudio.duration){
+	        	this.isPlaying=false;
+	        }
+	
+	        if(!this.isShowFooter){
+	
+	        	this.$refs.bar.style.left=this.now/this.nativeAudio.duration*100+"%";
+	        }
+	        
+	      }, 1000);
+			}
+      
       
       this.now = this.nativeAudio.currentTime;
 
